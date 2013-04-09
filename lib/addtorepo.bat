@@ -1,0 +1,1 @@
+call mvn install:install-file -DpomFile=tapestry-ckeditor-withautosave-0.0.1.pom -Dfile=tapestry-ckeditor-withautosave-0.0.1.jar -DgroupId=org.tynamo -DartifactId=tapestry-ckeditor-withautosave -Dversion=0.0.1 -Dpackaging=jar

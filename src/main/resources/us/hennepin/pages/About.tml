@@ -1,0 +1,33 @@
+<html t:type="layout" title="About notes.prototype"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+
+	<!-- <t:zone t:id="formZone" id="formZone"> <t:form> <t:textarea t:value="note.contents" 
+		t:id="editionForm" t:mixins="tynamo/ckeditor" parameters="prop:CKEditorParameters" 
+		/> </t:form> </t:zone> -->
+
+	<!-- -->
+
+	<t:zone t:id="noteFormZone" id="noteFormZone">
+		<t:form t:id="noteForm" t:type="form" t:context="note.id"
+			t:zone="^" t:clientValidation="false">
+			<t:textfield t:id="title" t:value="note.title" />
+			<t:if test="noteHasNotBeenSaved"><t:delegate to="block:t" /></t:if>
+
+			<t:textarea t:id="noteText" t:value="note.contents"
+				parameters="prop:CKEditorParameters" />
+		</t:form>
+
+	</t:zone>
+
+
+
+			<t:block id="t">
+				Make sure you save your note right away and then it will be autosaved after that.
+			</t:block>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,42 @@
+package us.hennepin.services;
+
+import org.apache.tapestry5.*;
+import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
+import org.apache.tapestry5.ioc.Configuration;
+import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.MethodAdviceReceiver;
+import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.annotations.Match;
+
+/**
+ * This module is automatically included as part of the Tapestry IoC Registry if <em>tapestry.execution-mode</em>
+ * includes <code>qa</code> ("quality assurance").
+ */
+public class QaModule
+{
+	public static void bind(ServiceBinder binder) {
+			binder.bind(PersistableNoteDao.class, PersistableNoteDaoImpl.class);
+
+	}
+	
+    public static void contributeApplicationDefaults(
+            MappedConfiguration<String, Object> configuration)
+    {
+        // The factory default is true but during the early stages of an application
+        // overriding to false is a good idea. In addition, this is often overridden
+        // on the command line as -Dtapestry.production-mode=false
+        configuration.add(SymbolConstants.PRODUCTION_MODE, false);
+
+        // The application version number is incorprated into URLs for some
+        // assets. Web browsers will cache assets because of the far future expires
+        // header. If existing assets are changed, the version number should also
+        // change, to force the browser to download new versions.
+        configuration.add(SymbolConstants.APPLICATION_VERSION, "1.0-SNAPSHOT-QA");
+    }
+    
+    @Match("*DAO")
+    public static void adviseTransactions(HibernateTransactionAdvisor advisor, MethodAdviceReceiver receiver)
+    {
+        advisor.addTransactionCommitAdvice(receiver);
+    }
+}

@@ -1,0 +1,14 @@
+<html t:type="layout" title="Contact us.hennepin"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+
+	<table t:type="grid" t:source="notes" t:row="note" t:model="persistableNoteModel" t:rowsPerPage="15" t:pagerPosition="top" add="delete">
+		[Grid here]
+		<p:idCell>
+			<a t:type="pagelink" t:page="about" t:context="note.id" href="#">${note.id}</a>
+		</p:idCell>
+		<p:deleteCell>
+			<t:actionlink t:id="delete" context="note.id">Delete</t:actionlink>
+		</p:deleteCell>
+	</table>
+
+</html>
